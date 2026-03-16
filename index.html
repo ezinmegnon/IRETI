@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ireti — Rejoins la communauté</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g1: #1D9E75;
+    --g2: #0F6E56;
+    --g3: #085041;
+    --mint: #9FE1CB;
+    --light: #E1F5EE;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: var(--g3);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(29,158,117,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(15,110,86,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 60% 30%, rgba(159,225,203,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Floating circles deco */
+  .deco {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .deco-1 {
+    width: 500px; height: 500px;
+    top: -200px; right: -150px;
+    border: 1px solid rgba(29,158,117,0.15);
+  }
+  .deco-2 {
+    width: 300px; height: 300px;
+    bottom: -100px; left: -80px;
+    border: 1px solid rgba(159,225,203,0.1);
+  }
+  .deco-3 {
+    width: 180px; height: 180px;
+    top: 40%; left: -60px;
+    border: 1px solid rgba(29,158,117,0.1);
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 48px 24px 60px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 36px;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 4px rgba(29,158,117,0.3), 0 12px 40px rgba(0,0,0,0.4);
+    position: relative;
+  }
+
+  .logo-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-band-1 { position: absolute; top: 0; left: 0; right: 0; height: 33.3%; background: var(--g1); }
+  .logo-band-2 { position: absolute; top: 33.3%; left: 0; right: 0; height: 33.3%; background: var(--g2); }
+  .logo-band-3 { position: absolute; bottom: 0; left: 0; right: 0; height: 33.3%; background: var(--g3); }
+
+  .logo-letter {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: 6px;
+  }
+  .logo-dot {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.92;
+  }
+
+  /* Header text */
+  .header { text-align: center; margin-bottom: 32px; animation: fadeDown 0.7s 0.1s ease both; }
+
+  .brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .tagline {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--mint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Main card */
+  .card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(159,225,203,0.15);
+    border-radius: 24px;
+    padding: 36px 32px;
+    width: 100%;
+    margin-bottom: 20px;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .card-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .card-sub {
+    font-size: 14px;
+    color: rgba(159,225,203,0.8);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  /* Segments */
+  .segments {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .seg {
+    background: rgba(29,158,117,0.15);
+    border: 1px solid rgba(29,158,117,0.25);
+    border-radius: 14px;
+    padding: 14px 12px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .seg:hover {
+    background: rgba(29,158,117,0.25);
+    border-color: rgba(29,158,117,0.5);
+    transform: translateY(-2px);
+  }
+
+  .seg-icon { font-size: 22px; margin-bottom: 6px; }
+
+  .seg-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .seg-desc {
+    font-size: 11px;
+    color: var(--mint);
+    line-height: 1.4;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .divider-line { flex: 1; height: 1px; background: rgba(159,225,203,0.2); }
+  .divider-text { font-size: 12px; color: rgba(159,225,203,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* CTA Button */
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 18px 24px;
+    background: var(--g1);
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 8px 32px rgba(29,158,117,0.35);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-btn:hover {
+    background: var(--g2);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(29,158,117,0.5);
+  }
+
+  .cta-btn:active { transform: translateY(0); }
+
+  .wa-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .cta-text { line-height: 1.2; }
+  .cta-main { display: block; font-weight: 500; }
+  .cta-hint { display: block; font-size: 12px; opacity: 0.8; }
+
+  /* Features card */
+  .features-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(159,225,203,0.1);
+    border-radius: 20px;
+    padding: 24px;
+    width: 100%;
+    margin-bottom: 20px;
+    animation: fadeUp 0.7s 0.35s ease both;
+  }
+
+  .features-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--mint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .feature-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--g1);
+    flex-shrink: 0;
+  }
+
+  .feature-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+  }
+
+  .feature-text strong { color: white; font-weight: 500; }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.7s 0.45s ease both;
+  }
+
+  .stat { text-align: center; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--g1);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: rgba(159,225,203,0.6);
+    letter-spacing: 0.05em;
+  }
+
+  .stat-divider { width: 1px; background: rgba(159,225,203,0.15); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+
+  .footer-badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .badge {
+    font-size: 11px;
+    color: rgba(159,225,203,0.7);
+    background: rgba(29,158,117,0.1);
+    border: 1px solid rgba(29,158,117,0.2);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(159,225,203,0.35);
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Pulse on CTA */
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(29,158,117,0.4), 0 8px 32px rgba(29,158,117,0.35); }
+    70% { box-shadow: 0 0 0 12px rgba(29,158,117,0), 0 8px 32px rgba(29,158,117,0.35); }
+    100% { box-shadow: 0 0 0 0 rgba(29,158,117,0), 0 8px 32px rgba(29,158,117,0.35); }
+  }
+
+  .cta-btn { animation: pulse-ring 2.5s 1.5s ease infinite; }
+  .cta-btn:hover { animation: none; }
+
+  @media (max-width: 400px) {
+    .brand { font-size: 36px; }
+    .card { padding: 28px 20px; }
+    .card-headline { font-size: 22px; }
+    .segments { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deco deco-1"></div>
+<div class="deco deco-2"></div>
+<div class="deco deco-3"></div>
+
+<div class="container">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <div class="logo">
+      <div class="logo-inner">
+        <div class="logo-band-1"></div>
+        <div class="logo-band-2"></div>
+        <div class="logo-band-3"></div>
+        <div class="logo-dot"></div>
+        <span class="logo-letter">I</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand name -->
+  <div class="header">
+    <div class="brand">Ireti</div>
+    <div class="tagline">L'espoir en action</div>
+  </div>
+
+  <!-- Main card -->
+  <div class="card">
+    <div class="card-headline">Rejoins la communauté<br>WhatsApp Ireti 🌍</div>
+    <div class="card-sub">
+      Stages, bourses, appels à projets et webinaires —<br>
+      chaque jour, les meilleures opportunités africaines<br>directement dans ta poche.
+    </div>
+
+    <!-- Segments -->
+    <div class="segments">
+      <div class="seg">
+        <div class="seg-icon">🎓</div>
+        <span class="seg-label">Étudiants</span>
+        <span class="seg-desc">Bourses · Stages · Congrès</span>
+      </div>
+      <div class="seg">
+        <div class="seg-icon">💼</div>
+        <span class="seg-label">Jeunes diplômés</span>
+        <span class="seg-desc">Emplois · Stages · Réseau</span>
+      </div>
+      <div class="seg">
+        <div class="seg-icon">🔬</div>
+        <span class="seg-label">Chercheurs</span>
+        <span class="seg-desc">Grants · Conférences · Collab</span>
+      </div>
+      <div class="seg">
+        <div class="seg-icon">🏢</div>
+        <span class="seg-label">Entreprises</span>
+        <span class="seg-desc">Talents · Grants · Partenariats</span>
+      </div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-text">Rejoindre</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- CTA -->
+    <a href="https://chat.whatsapp.com/KgDvjMslZTRJqriPX5C7RL?mode=gi_t" class="cta-btn" target="_blank" rel="noopener">
+      <svg class="wa-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      <span class="cta-text">
+        <span class="cta-main">Rejoindre le canal WhatsApp</span>
+        <span class="cta-hint">Gratuit · Clique pour rejoindre</span>
+      </span>
+    </a>
+  </div>
+
+  <!-- Features -->
+  <div class="features-card">
+    <div class="features-title">Pourquoi rejoindre Ireti ?</div>
+    <div class="features-list">
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <span class="feature-text"><strong>Quotidien</strong> — 1 à 3 opportunités vérifiées chaque jour</span>
+      </div>
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <span class="feature-text"><strong>Toute l'Afrique</strong> — Burkina, Sénégal, Côte d'Ivoire, Nigeria et plus</span>
+      </div>
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <span class="feature-text"><strong>Vérifié</strong> — Chaque opportunité est contrôlée avant publication</span>
+      </div>
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <span class="feature-text"><strong>Rapide</strong> — Reçois les opportunités avant tout le monde</span>
+      </div>
+      <div class="feature">
+        <div class="feature-dot"></div>
+        <span class="feature-text"><strong>100% gratuit</strong> — Aucun frais, aucun abonnement requis</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">7</span>
+      <span class="stat-label">Pays couverts</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Opportunités</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">0</span>
+      <span class="stat-label">FCFA requis</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-badges">
+      <span class="badge">Stages</span>
+      <span class="badge">Bourses</span>
+      <span class="badge">Appels à projets</span>
+      <span class="badge">Webinaires</span>
+      <span class="badge">Collaborations</span>
+    </div>
+    <div class="footer-copy">Ireti · L'espoir en action · ireti.app</div>
+  </div>
+
+</div>
+
+</body>
+</html>
